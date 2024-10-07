@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-_l0ca(k9l0r!+sfqi4+*_+j(n#84b@12h49&cdz_flb=he@a8k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -115,12 +115,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000',  # Next.js development server
-#     'https://ecowiser-dev.netlify.app'
-# ]
-
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # Next.js development server
+    'https://ecowiser-dev.netlify.app'
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
