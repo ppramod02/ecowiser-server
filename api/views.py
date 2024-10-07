@@ -59,21 +59,26 @@ def brand_detail(request, pk):
         return HttpResponse(status=204)
     
 @csrf_exempt
-def brand_search(request, name):
+def brand_search(request):
     """
-    Retrieve products of a brand.
+    Search brands
     """
+    field = request.GET.get('field', None)
+    value = request.GET.get('value', None)
     try:
-        brand = Brand.objects.filter(name__istartswith=name)
-        brand_ids = brand.values_list('id', flat=True)
+        if(field == 'creator_id'):
+            brands = Brand.objects.filter(creator_id=int(value))
+        elif(field == 'name'):
+            brands = Brand.objects.filter(name__istartswith=value)
+
     except Brand.DoesNotExist:
         return HttpResponse(status=404)
     
     if request.method == 'GET':
-        products = Product.objects.filter(brand_id__in=brand_ids)
-        serializer = ProductSerializer(products, many=True)
+        serializer = BrandSerializer(brands, many=True)
         return JsonResponse(serializer.data, safe=False)
     
+
 @csrf_exempt
 def data_by_creator(request, id):
     """
@@ -134,3 +139,23 @@ def product_detail(request, pk):
     elif request.method == 'DELETE':
         product.delete()
         return HttpResponse(status=204)
+    
+@csrf_exempt
+def product_search(request):
+    """
+    Search brands
+    """
+    field = request.GET.get('field', None)
+    value = request.GET.get('value', None)
+    try:
+        if(field == 'creator_id'):
+            products = Product.objects.filter(creator_id=int(value))
+        elif(field == 'name'):
+            products = Product.objects.filter(name__istartswith=value)
+
+    except Product.DoesNotExist:
+        return HttpResponse(status=404)
+    
+    if request.method == 'GET':
+        serializer = ProductSerializer(products, many=True)
+        return JsonResponse(serializer.data, safe=False)
