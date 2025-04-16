@@ -117,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # Next.js development server
-    'https://ecowiser-dev.netlify.app'
+    'https://managemint.netlify.app'
 ]
 
 REST_FRAMEWORK = {
